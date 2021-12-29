@@ -198,10 +198,10 @@ void generate_all_paths( char*** pathsetref, int* numpathsref, maze_cell** maze,
 	  new_point = ( char * ) calloc( 2, sizeof( char ) );
 	  new_point[0] = maze[row][column].character; //gets the next character in the current trajectory
 	  if ( path_length ) { //if path_length != 0
-		  new_path = strcat( new_path, path ); //concatenates old path into new_path
+		new_path = strcat( new_path, path ); //concatenates old path into new_path
 	  }
 	  new_path = strcat( new_path, new_point ); //concatenates the next path point into the new_path
-    free(new_point); //frees temporary pointer
+      free(new_point); //frees temporary pointer
 
 	//If we have reached the right boundary, store associated path into path matrix
     if ( column == ( dimension - 1 ) ) {
@@ -210,21 +210,21 @@ void generate_all_paths( char*** pathsetref, int* numpathsref, maze_cell** maze,
 			 2. Copy the solution path to the location of new string
 			 3. Increment paths counter */
 	    *pathsetref = ( char** ) realloc ( *pathsetref, ( (*numpathsref) + 1 ) * sizeof( char* ) );
-      (*pathsetref)[*numpathsref] = ( char* ) calloc( strlen( new_path ) + 1, sizeof( char ));
+        (*pathsetref)[*numpathsref] = ( char* ) calloc( strlen( new_path ) + 1, sizeof( char ));
 	    strcpy( (*pathsetref)[*numpathsref], new_path );
 	    (*numpathsref)++;
-      return;
+        return;
     } else {
 		  /* 1. Mark point as visited
 			   2. Recursively search in each direction using the new path, and the same pathsetref and numpathsref
 			   3. Mark point as unvisited */
-	  maze[row][column].visited = VISITED;
-	  generate_all_paths(pathsetref, numpathsref, maze, dimension, row, column + 1, new_path); //move horizontally to the right
-	  generate_all_paths(pathsetref, numpathsref, maze, dimension, row, column - 1, new_path); //move horizontally to the left
-	  generate_all_paths(pathsetref, numpathsref, maze, dimension, row + 1, column , new_path); //move vertically down
-	  generate_all_paths(pathsetref, numpathsref, maze, dimension, row - 1, column, new_path); //move vertically up
-	  maze[row][column].visited = UNVISITED; //start at new point
-	  return;
+	    maze[row][column].visited = VISITED;
+	    generate_all_paths(pathsetref, numpathsref, maze, dimension, row, column + 1, new_path); //move horizontally to the right
+	    generate_all_paths(pathsetref, numpathsref, maze, dimension, row, column - 1, new_path); //move horizontally to the left
+	    generate_all_paths(pathsetref, numpathsref, maze, dimension, row + 1, column , new_path); //move vertically down
+	    generate_all_paths(pathsetref, numpathsref, maze, dimension, row - 1, column, new_path); //move vertically up
+	    maze[row][column].visited = UNVISITED; //start at new point
+	    return;
     }
   }
 }
@@ -243,6 +243,7 @@ int path_cost ( char* path_string )
 {
   int cost = 0;
   int i = 0;
+  
   while (path_string[i] != '\0') {
 	  cost += (path_string[i] - '0'); //trick for converting an integer stored as a character into an integer
 	  //Eg. int d = '5' - '0' -> int d = 5

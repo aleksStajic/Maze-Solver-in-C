@@ -74,9 +74,9 @@ int get_maze_dimension( FILE* maze_file )  {
   int  dimension = 0;
   char line_buffer[BUFFER];
 
-	dimension = strlen( fgets ( line_buffer, BUFFER, maze_file ) );
+  dimension = strlen( fgets ( line_buffer, BUFFER, maze_file ) );
 
-	fseek( maze_file, 0, SEEK_SET );
+  fseek( maze_file, 0, SEEK_SET );
 
     /* Checks if text file was created in Windows and contains '\r'
 	   IF TRUE reduce strlen by 2 in order to omit '\r' and '\n' from each line

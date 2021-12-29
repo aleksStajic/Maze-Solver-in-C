@@ -135,7 +135,7 @@ maze_cell** parse_maze( FILE* maze_file, int dimension ) {
 	  }
     row++;
   }
-	return maze;
+ return maze;
 }
 
 /**
@@ -201,16 +201,16 @@ void generate_all_paths( char*** pathsetref, int* numpathsref, maze_cell** maze,
 		new_path = strcat( new_path, path ); //concatenates old path into new_path
 	  }
 	  new_path = strcat( new_path, new_point ); //concatenates the next path point into the new_path
-      free(new_point); //frees temporary pointer
+          free(new_point); //frees temporary pointer
 
 	//If we have reached the right boundary, store associated path into path matrix
-    if ( column == ( dimension - 1 ) ) {
+          if ( column == ( dimension - 1 ) ) {
 	    /* 1. Reallocate memory in global paths array to make room
 			    for a new solution string
 			 2. Copy the solution path to the location of new string
 			 3. Increment paths counter */
 	    *pathsetref = ( char** ) realloc ( *pathsetref, ( (*numpathsref) + 1 ) * sizeof( char* ) );
-        (*pathsetref)[*numpathsref] = ( char* ) calloc( strlen( new_path ) + 1, sizeof( char ));
+            (*pathsetref)[*numpathsref] = ( char* ) calloc( strlen( new_path ) + 1, sizeof( char ));
 	    strcpy( (*pathsetref)[*numpathsref], new_path );
 	    (*numpathsref)++;
         return;
@@ -246,7 +246,6 @@ int path_cost ( char* path_string )
   
   while (path_string[i] != '\0') {
 	  cost += (path_string[i] - '0'); //trick for converting an integer stored as a character into an integer
-	  //Eg. int d = '5' - '0' -> int d = 5
 	  i++;
   }
   
